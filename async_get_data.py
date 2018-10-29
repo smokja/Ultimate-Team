@@ -94,12 +94,12 @@ async def get_raw_data(session, url, name):
 
             as_dict = dict()
             as_dict[name] = information_table
-            write_data_to_file(as_dict)
+            write_data_to_file(as_dict, "players.json")
             return await response.release()
     except:
         fail = True
         failed.append(url) 
-        write_fail(url)
+        write_data_to_file(url, "failed.json")
     finally:
         counter = counter + 1
         if (fail):
@@ -107,13 +107,8 @@ async def get_raw_data(session, url, name):
         else:
             print('(%s/%s) success %s'%(counter, length, url))
 
-def write_fail(data):
-    with open('failed.json', 'a') as f:
-        json.dump(data, f)
-        f.write(os.linesep)
-
-def write_data_to_file(data):
-    with open('players.json', 'a') as f:
+def write_data_to_file(data, path):
+    with open(path, 'a') as f:
         json.dump(data, f)
         f.write(os.linesep)
    
