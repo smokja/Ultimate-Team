@@ -18,7 +18,7 @@ failed = list()
 counter = 0
 length = 0
 class RateLimiter:
-    RATE = 1  # three request per second
+    RATE = 1  # one request per second
     MAX_TOKENS = 1
 
     def __init__(self, client):
